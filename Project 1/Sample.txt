@@ -1,0 +1,150 @@
+SUCCESS CASE
+----------------------------------
+
+TCPServer:
+
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java TCPServer -p 8591 -f passwords.csv
+User Confirmed
+Sensor: admin
+Value: 25.0
+Time: 2016-10-02T21:58:08.768
+SensorMin: 25.0
+SensorAvg: 25.0
+SensorMax: 25.0
+allAvg: 25.0
+User Confirmed
+Sensor: john
+Value: 50.0
+Time: 2016-10-02T21:58:22.244
+SensorMin: 25.0
+SensorAvg: 50.0
+SensorMax: 50.0
+allAvg: 37.5
+User Confirmed
+Sensor: john
+Value: 25.0
+Time: 2016-10-02T21:58:27.040
+SensorMin: 25.0
+SensorAvg: 37.5
+SensorMax: 50.0
+allAvg: 33.333333333333336
+
+
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java TCPSensor -s localhost -p 8591 -u john -c abcd -r 50
+User Confirmed
+Min:50.0
+Max:50.0
+Average:50.0
+Average of All:50.0
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java TCPSensor -s localhost -p 8591 -u john -c abcd -r 25
+User Confirmed
+Min:25.0
+Max:50.0
+Average:37.5
+Average of All:37.5
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java TCPSensor -s localhost -p 8591 -u admin -c password -r 25
+User Confirmed
+Min:25.0
+Max:50.0
+Average:25.0
+Average of All:33.333333333333336
+
+
+UDPServer:
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java UDPServer -p 8591 -f passwords.csv
+User Confirmed
+Sensor: john
+Time: 2016-10-02T22:07:47.880
+Value: 100.0
+SensorMin: 100.0
+SensorAvg: 100.0
+SensorMax: 100.0
+allAvg: 100.0
+User Confirmed
+Sensor: john
+Time: 2016-10-02T22:07:52.845
+Value: 50.0
+SensorMin: 50.0
+SensorAvg: 75.0
+SensorMax: 100.0
+allAvg: 75.0
+User Confirmed
+Sensor: admin
+Time: 2016-10-02T22:08:10.272
+Value: 30.0
+SensorMin: 30.0
+SensorAvg: 30.0
+SensorMax: 100.0
+allAvg: 60.0
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java UDPSensor -s 127.0.0.1 -p 8591 -u john -c abcd -r 100
+User Confirmed
+Min:100.0
+Max:100.0
+Average:100.0
+Average of All:100.0
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java UDPSensor -s 127.0.0.1 -p 8591 -u john -c abcd -r 50
+User Confirmed
+Min:50.0
+Max:100.0
+Average:75.0
+Average of All:75.0
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java UDPSensor -s 127.0.0.1 -p 8591 -u admin -c password -r 30
+User Confirmed
+Min:30.0
+Max:100.0
+Average:30.0
+Average of All:60.0
+
+
+
+
+
+
+INVALID USER
+-------------------
+
+TCP:
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java TCPServer -p 8591 -f passwords.csv
+User authorization failed for client: 127.0.0.1 port: 56058 user: john
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java TCPSensor -s localhost -p 8591 -u john -c ab -r 25
+Invalid Username or Password
+
+UDP:
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java UDPServer -p 8591 -f passwords.csv
+User authorization failed for client: 127.0.0.1 port: 55800 user: admin
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java UDPSensor -s 127.0.0.1 -p 8591 -u admin -c passwd -r 30
+Invalid Username or Password
+
+INVALID VALUE
+----------------------
+
+TCP:
+
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java TCPSensor -s localhost -p 8591 -u john -c abcd -r a
+Exception in thread "main" java.lang.NumberFormatException: For input string: "a"
+        at sun.misc.FloatingDecimal.readJavaFormatString(Unknown Source)
+        at sun.misc.FloatingDecimal.parseDouble(Unknown Source)
+        at java.lang.Double.parseDouble(Unknown Source)
+        at TCPSensor.main(TCPSensor.java:54)
+
+UDP:
+C:\Users\admin\Documents\School Work\CS 3251\Project 1>java UDPSensor -s 127.0.0.1 -p 8591 -u admin -c password -r aa
+Exception in thread "main" java.lang.NumberFormatException: For input string: "aa"
+        at sun.misc.FloatingDecimal.readJavaFormatString(Unknown Source)
+        at sun.misc.FloatingDecimal.parseDouble(Unknown Source)
+        at java.lang.Double.parseDouble(Unknown Source)
+        at UDPSensor.main(UDPSensor.java:57)
+
+
